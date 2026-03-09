@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -27,4 +30,8 @@ public class User {
 
     @Column(name = "Creation_date")
     private Date createdAt;
+
+
+    @OneToMany(mappedBy = "user")
+    private Set<Topic> topics = new LinkedHashSet<>();
 }
