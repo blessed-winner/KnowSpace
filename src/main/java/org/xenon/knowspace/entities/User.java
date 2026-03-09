@@ -30,6 +30,9 @@ public class User {
     @Column(name = "Creation_date")
     private Date createdAt;
 
+    @Column(name = "Role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user")
     private Set<Topic> topics = new LinkedHashSet<>();
