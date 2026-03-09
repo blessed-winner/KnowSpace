@@ -1,4 +1,4 @@
-package entities;
+package org.xenon.knowspace.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
