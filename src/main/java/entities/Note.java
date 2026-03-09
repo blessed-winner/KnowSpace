@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +19,17 @@ public class Note {
 
     @Column(name = "Name")
     private String name;
+
+    @Column(name = "Content")
+    private String content;
+
+    @Column(name = "Creation_date")
+    private Date createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "topic_id")
+    private Topic topic;
+
+    @ManyToMany(mappedBy = "notes")
+    private List<Tag> tags = new ArrayList<>();
 }
