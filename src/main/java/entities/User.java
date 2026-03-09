@@ -34,4 +34,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Topic> topics = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<MemoryItem> memoryItems = new LinkedHashSet<>();
 }

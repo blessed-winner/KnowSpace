@@ -23,4 +23,8 @@ public class MemoryItem {
 
     @Column(name = "last_review")
     private Date lastReviewed;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
