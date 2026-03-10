@@ -2,6 +2,7 @@ package org.xenon.knowspace.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "tags")
+@Data
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

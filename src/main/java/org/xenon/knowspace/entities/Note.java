@@ -2,7 +2,9 @@ package org.xenon.knowspace.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.convert.DataSizeUnit;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "notes")
+@Data
 public class Note {
     @Id
     @GeneratedValue
