@@ -12,6 +12,14 @@ import java.util.Date;
 public class JwtService {
     private final JwtConfig jwtConfig;
 
+    public Jwt generateAccessToken(User user){
+        return generateToken(user, jwtConfig.getAccessTokenExpiration());
+    }
+
+    public Jwt generateRefreshToken(User user){
+        return generateToken(user, jwtConfig.getRefreshTokenExpiration());
+    }
+
     private Jwt generateToken(User user, long tokenExpiration){
          var claims = Jwts.claims()
                  .subject(user.getId().toString())
@@ -23,6 +31,15 @@ public class JwtService {
                  .build();
 
          return new Jwt(claims, jwtConfig.getSecretKey());
+    }
+
+    public Jwt parseToken(String token){
+        try {
+            var claims = getClaims(token);
+            return new Jwt(claims, jwtConfig.getSecretKey());
+        } catch (Exception e){
+            return null;
+        }
     }
 
     private Claims getClaims(String token){
