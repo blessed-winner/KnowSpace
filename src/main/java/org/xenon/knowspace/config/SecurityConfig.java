@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.xenon.knowspace.filters.JwtAuthenticationFilter;
 import org.xenon.knowspace.services.JwtService;
 
 @Configuration
@@ -29,6 +30,8 @@ public class SecurityConfig {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    public JwtAuthenticationFilter jwtAuthenticationFilter(){ return new JwtAuthenticationFilter(jwtService);}
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
