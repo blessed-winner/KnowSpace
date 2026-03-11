@@ -40,8 +40,6 @@ public class AuthController {
                 )
         );
 
-            var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-
             var accessToken = jwtService.generateAccessToken(user);
             var refreshToken = jwtService.generateRefreshToken(user);
 
