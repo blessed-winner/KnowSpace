@@ -3,6 +3,7 @@ package org.xenon.knowspace.config;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -52,6 +53,7 @@ public class SecurityConfig {
                 .csrf((AbstractHttpConfigurer::disable))
                 .authorizeHttpRequests(
                         c->c.requestMatchers("/auth/**").permitAll()
+                                                          .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 ).addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
