@@ -20,13 +20,13 @@ public class Note {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Content")
+    @Column(name = "content")
     private String content;
 
-    @Column(name = "Creation_date")
+    @Column(name = "creation_date")
     private Date createdAt;
 
     @ManyToOne

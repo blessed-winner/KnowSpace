@@ -19,13 +19,13 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "Content")
+    @Column(name = "content")
     private String content;
 
-    @Column(name = "Creation_date")
+    @Column(name = "creation_date")
     private Date createdAt;
 
     @ManyToMany

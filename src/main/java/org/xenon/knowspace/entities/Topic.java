@@ -17,13 +17,13 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "Creation_date")
+    @Column(name = "creation_date")
     private Date createdAt;
 
     @ManyToOne

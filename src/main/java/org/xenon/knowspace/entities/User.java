@@ -17,22 +17,22 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "Id")
+    @Column(name = "id")
     private String id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "Creation_date")
+    @Column(name = "creation_date")
     private Date createdAt;
 
-    @Column(name = "Role")
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
 
