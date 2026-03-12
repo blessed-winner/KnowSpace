@@ -9,7 +9,6 @@ public class KnowSpaceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(KnowSpaceApplication.class, args);
-        System.out.print(SpringBootVersion.getVersion());
     }
 
 }
