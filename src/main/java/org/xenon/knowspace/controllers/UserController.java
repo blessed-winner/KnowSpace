@@ -15,6 +15,7 @@ import org.xenon.knowspace.entities.User;
 import org.xenon.knowspace.mappers.UserMapper;
 import org.xenon.knowspace.repositories.UserRepository;
 
+import java.util.Date;
 import java.util.Map;
 
 @RestController
@@ -34,9 +35,11 @@ public class UserController {
              return ResponseEntity.badRequest().body(Map.of("Email", "Email already exists"));
          }
 
-         var user = userMapper.toEntity(request);
+         User user = userMapper.toEntity(request);
          user.setPassword(passwordEncoder.encode(user.getPassword()));
          user.setRole(Role.USER);
+         user.setCreatedAt(new Date());
+         userRepository.save(user);
          var userDto = userMapper.toDto(user);
          var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
 
