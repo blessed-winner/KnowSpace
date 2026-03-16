@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.xenon.knowspace.dtos.RegisterUserRequest;
+import org.xenon.knowspace.dtos.UserDto;
 import org.xenon.knowspace.entities.Role;
 import org.xenon.knowspace.entities.User;
 import org.xenon.knowspace.mappers.UserMapper;
@@ -45,8 +46,12 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<?>getAllUsers(){
-        var users = userRepository.findAll().stream().map(userMapper::toDto).toList();
-        return ResponseEntity.ok(users);
+    public Iterable<UserDto>getAllUsers(){
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
+
+
 }
