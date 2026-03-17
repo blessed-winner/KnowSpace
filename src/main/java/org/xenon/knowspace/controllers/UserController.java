@@ -54,10 +54,11 @@ public class UserController {
                 .toList();
     }
 
+
+    //Get a user by id
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable String id){
         var user = userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
         return ResponseEntity.ok(userMapper.toDto(user));
-
-    }
+    } 
 }
