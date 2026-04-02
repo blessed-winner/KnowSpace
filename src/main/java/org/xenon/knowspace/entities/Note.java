@@ -30,7 +30,7 @@ public class Note {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "note_tag",
+            name = "note_tags",
             joinColumns = @JoinColumn(name = "note_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
