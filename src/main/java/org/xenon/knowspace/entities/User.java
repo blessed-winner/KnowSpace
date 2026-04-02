@@ -1,13 +1,16 @@
 package org.xenon.knowspace.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.*;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,12 +22,12 @@ public class User {
 
     private String password;
 
-    @Column(name = "creation-date")
+    @Column(name = "creation_date")
     private Date createdAt;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Topic> topics = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch =  FetchType.LAZY)
     private Set<MemoryItem> memoryItems = new HashSet<>();
 }

@@ -1,13 +1,16 @@
 package org.xenon.knowspace.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.*;
 
 @Entity
 @Table(name = "topics")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +27,6 @@ public class Topic {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic",fetch = FetchType.LAZY)
     private Set<Note> notes = new HashSet<>();
 }
