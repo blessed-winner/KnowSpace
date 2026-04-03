@@ -42,5 +42,12 @@ public class JwtService {
                 .getPayload();
     }
 
-
+    public boolean isTokenValid(String token){
+        try{
+            extractClaims(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
