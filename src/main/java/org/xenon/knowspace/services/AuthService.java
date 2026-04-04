@@ -9,9 +9,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.xenon.knowspace.config.JwtConfig;
 import org.xenon.knowspace.dtos.JwtResponse;
 import org.xenon.knowspace.dtos.LoginRequest;
+import org.xenon.knowspace.dtos.RegisterUserRequest;
 import org.xenon.knowspace.repositories.UserRepository;
 
 @Service
@@ -48,5 +50,13 @@ public class AuthService {
         }catch (Exception e){
             return ResponseEntity.status(401).build();
         }
+    }
+
+    public ResponseEntity<JwtResponse> register(
+            @Valid @RequestBody RegisterUserRequest request,
+            HttpServletResponse response,
+            UriComponentsBuilder uriBuilder
+            ){
+
     }
 }
