@@ -24,23 +24,27 @@ public class AuthService {
             LoginRequest request,
             HttpServletResponse response
     ){
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-        String accessToken = jwtService.generateAccessToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
+        try{
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+            var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+            String accessToken = jwtService.generateAccessToken(user);
+            String refreshToken = jwtService.generateRefreshToken(user);
 
-        Cookie cookie = new Cookie("refreshToken",refreshToken);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/auth");
-        cookie.setMaxAge(jwtConfig.getRefreshTokenExpiration());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/auth");
+            cookie.setMaxAge(jwtConfig.getRefreshTokenExpiration());
 
-        response.addCookie(cookie);
+            response.addCookie(cookie);
 
-        return ResponseEntity.ok(new JwtResponse(accessToken));
+            return ResponseEntity.ok(new JwtResponse(accessToken));
+        }catch (Exception e){
+            return ResponseEntity.status(401).build();
+        }
     }
 }
