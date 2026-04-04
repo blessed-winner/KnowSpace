@@ -5,10 +5,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.xenon.knowspace.services.JwtService;
 
 import java.io.IOException;
+import java.util.List;
 
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -19,6 +22,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
-        var token = authHeader.replace("Bearer ", "");
+        String token = authHeader.replace("Bearer ", "");
+        try{
+            String userId = jwtService.extractUserId(token);
+            String role = jwtService.extractUserRole(token);
+            var authentication = new UsernamePasswordAuthenticationToken(
+                    userId,
+                    null,
+                    List.of(new SimpleGrantedAuthority("ROLE_" + role))
+            );
+
+        }catch(Exception e){
+            filterChain.doFilter(request,response);
+        }
+
+        filterChain.doFilter(request,response);
+
     }
 }
