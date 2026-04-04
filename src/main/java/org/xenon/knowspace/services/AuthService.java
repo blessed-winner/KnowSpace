@@ -2,11 +2,13 @@ package org.xenon.knowspace.services;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.xenon.knowspace.config.JwtConfig;
 import org.xenon.knowspace.dtos.JwtResponse;
 import org.xenon.knowspace.dtos.LoginRequest;
@@ -21,7 +23,7 @@ public class AuthService {
     private final JwtConfig jwtConfig;
 
     public ResponseEntity<JwtResponse> login(
-            LoginRequest request,
+            @Valid @RequestBody LoginRequest request,
             HttpServletResponse response
     ){
         try{
